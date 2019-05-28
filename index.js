@@ -1,6 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// create a server object:
+/**
+ * Receive a Slash Command request from Slack.
+ *
+ * Trigger this function by making a POST request with a payload to:
+ * https://[YOUR_REGION].[YOUR_PROJECT_ID].cloudfunctions.net/kgsearch
+ *
+ * @example
+ * curl -X POST "https://us-central1.your-project-id.cloudfunctions.net/kgSearch" --data '{"token":"[YOUR_SLACK_TOKEN]","text":"giraffe"}'
+ *
+ * @param {object} req Cloud Function request object.
+ * @param {object} req.body The request payload.
+ * @param {string} req.body.token Slack's verification token.
+ * @param {string} req.body.text The user's search query.
+ * @param {object} res Cloud Function response object.
+ */
 exports.ball = function (req, res) {
     var params = req.body.params;
     if (params === undefined) {

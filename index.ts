@@ -1,37 +1,58 @@
-import http = require('http');
+// import http = require('http');
 import NBA = require('nba');
 
-// create a server object:
+
+// TODO: Verify Webhook:
+
+// TODO: Post to Slack:
+
+// TODO: Get Information:
+
+
+/**
+ * Receive a Slash Command request from Slack.
+ *
+ * Trigger this function by making a POST request with a payload to:
+ * https://[YOUR_REGION].[YOUR_PROJECT_ID].cloudfunctions.net/kgsearch
+ *
+ * @example
+ * curl -X POST "https://us-central1.your-project-id.cloudfunctions.net/kgSearch" --data '{"token":"[YOUR_SLACK_TOKEN]","text":"giraffe"}'
+ *
+ * @param {object} req Cloud Function request object.
+ * @param {object} req.body The request payload.
+ * @param {string} req.body.token Slack's verification token.
+ * @param {string} req.body.text The user's search query.
+ * @param {object} res Cloud Function response object.
+ */
 exports.ball = (req, res) => {
+    let params = req.body.params;
+    if (params === undefined){
 
-  let params = req.body.params;
-  if (params === undefined){
+    }
+    else {
+        params = params.split(' ');
+    }
+    console.log(params);
 
-  }
-  else {
-    params = params.split(' ');
-  }
-  console.log(params);
-
-  res.end(params);
+    res.end(params);
 
     // Parse Through String:
     if (params.indexOf(' ') !== -1) {
     // If we've got spaces, strip 'em
-      params = params.split(' ');
+        params = params.split(' ');
     }
     console.log(params);
 
     switch (params[0]) {
-      case 'team':
-        console.log('Team Called:');
-        break;
-      case 'player':
-        console.log('Player Called');
-        break;
-      default:
-        console.log('Incorrect Command!');
-        break;
+        case 'team':
+            console.log('Team Called:');
+            break;
+        case 'player':
+            console.log('Player Called');
+            break;
+        default:
+            console.log('Incorrect Command!');
+            break;
       // res.status(404).send('Incorrect command!');
     }
     // console.log(JSON.parse(data));

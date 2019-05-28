@@ -1,9 +1,10 @@
 {
-    "extends": ["eslint:recommended", "google"],
+    "parser": "@typescript-eslint/parser",
+    "extends": ["google", "plugin:@typescript-eslint/recommended", "eslint:recommended"],
     "rules": {
     },
     "parserOptions": {
-      // "ecmaVersion": 2017,
-      "sourceType": "module"
+      "sourceType": "module",
+      "ecmaVersion": 2018
      }
 }

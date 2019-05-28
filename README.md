@@ -37,10 +37,10 @@ gcloud functions deploy ball --runtime nodejs10 --trigger-http
 ## Usage:
 Type the commands into your slack channel:
 ```
-/ball Lebron James
-/ball Lakers
-/ball Western
-/ball Eastern
+/ball player Lebron James
+/ball team Lakers
+/ball conf Western
+/ball conf Eastern
 /ball today
 ```
 
