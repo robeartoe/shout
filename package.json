@@ -4,16 +4,23 @@
   "description": "Get basketball information to slack from Google Cloud Functions",
   "main": "index.js",
   "scripts": {
+    "start": "functions-framework --target=ball",
+    "build": "./node_modules/.bin/tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Robert Ruiz",
   "license": "ISC",
   "dependencies": {
     "http": "0.0.0",
-    "nba": "^4.6.0"
+    "nba": "^4.6.0",
+    "request": "^2.88.0"
   },
   "devDependencies": {
+    "@google-cloud/functions-framework": "^1.1.0",
+    "@types/node": "^12.0.2",
     "eslint": "^5.16.0",
-    "eslint-config-google": "^0.12.0"
+    "eslint-config-google": "^0.12.0",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5"
   }
 }
