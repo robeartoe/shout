@@ -3,6 +3,7 @@
       "baseUrl": ".",
       "paths": { "*": ["types/*"] },
         "target": "es2018",
-        "module": "commonjs"
+        "module": "commonjs",
+        "moduleResolution": "node"
     }
 }
