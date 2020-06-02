@@ -1,5 +1,8 @@
-import NBA from 'nba';
-import express from 'express';
+import NBA from 'https://deno.land/x/npm:nba/index.js';
+import { createRequire } from "https://deno.land/std@v0.53.0/node/module.ts";
+
+const require = createRequire(import.meta.url);
+const express = require('express');
 
 // const express = require('express');
 const app = express();
@@ -63,8 +66,7 @@ function ball(req: any, res: any): any {
 
 app.post('/', ball);
 
-const port = process.env.PORT || 8080;
-
+const port = 8080;
 app.listen(port, () => {
   console.log('Hello world listening on port', port);
 });
