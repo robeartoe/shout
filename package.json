@@ -1,7 +1,7 @@
 {
-  "name": "ball",
+  "name": "shout",
   "version": "1.0.0",
-  "description": "Get basketball information to slack from Google Cloud Run",
+  "description": "Shout your point across in slack from Google Cloud Run",
   "main": "index.js",
   "scripts": {
     "start": "functions-framework --target=ball",
@@ -10,12 +10,6 @@
   },
   "author": "Robert Ruiz",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1",
-    "http": "0.0.0",
-    "nba": "^4.8.0",
-    "request": "^2.88.0"
-  },
   "devDependencies": {
     "@google-cloud/functions-framework": "^1.1.0",
     "@types/node": "^14.0.5",
