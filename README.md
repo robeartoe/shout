@@ -1,10 +1,10 @@
-# Ball:
-Ball is a slack command written in node, made to get information on teams, players, division standings, and scores.
+# Shout:
+Shout is a slack command written in deno. It is made to GET YOUR POINTS ACROSS WHILE IN SLACK.
 
 ## Installation:
 Clone this repository
 ```bash 
-git clone https://github.com/robeartoe/ball.git
+git clone https://github.com/robeartoe/shout.git
 ```
 Using the config.default.json file as a template, make a config.json file with your slack token:
 ```
@@ -14,11 +14,7 @@ Using the config.default.json file as a template, make a config.json file with y
 ```
 
 ## Development:
-You can setup a local functions instance by using the command:
-```bash
-npm start
-```
-Make sure functions-framework is installed.
+<!-- TODO: Redo this section for Cloud Run -->
 
 Afterwards you can send request to that function instance.
 You can send the commands 
@@ -31,17 +27,13 @@ You can send the commands
 ## Deployment:
 To deploy the function, make sure gcloud is installed.
 ```bash
-gcloud functions deploy ball --runtime nodejs10 --trigger-http
+ #TODO: Build command / script!
 ```
 
 ## Usage:
 Type the commands into your slack channel:
 ```
-/ball player Lebron James
-/ball team Lakers
-/ball conf Western
-/ball conf Eastern
-/ball today
+/shout see? I'm really passionate about this topic!
 ```
 
 ## Contributing:
