@@ -1,10 +1,17 @@
-import { createRequire } from "https://deno.land/std@v0.53.0/node/module.ts";
+import { Application, Router } from "https://deno.land/x/oak/mod.ts";
+import { config } from 'https://deno.land/x/dotenv/mod.ts';
+// Import Env Variables:
+// const { PORT } = config();
 
-const require = createRequire(import.meta.url);
-const express = require('express');
+const app = new Application();
 
-// const express = require('express');
-const app = express();
+app.addEventListener("listen", ({hostname, port, secure}) => {
+  console.log(
+    `Listening on: ${secure ? "https://" : "http://"}${
+      hostname ?? "localhost"
+    }:${port}`
+  );
+})
 
 // TODO: Verify Webhook:
 
@@ -12,6 +19,8 @@ const app = express();
 
 // TODO: Get Information:
 
+// TODO: Router:
+const router = new Router();
 
 /**
  * Receive a Slash Command request from Slack.
@@ -28,18 +37,28 @@ const app = express();
  * @param {string} req.body.text The user's search query.
  * @param {object} res Cloud Function response object.
  */
-function ball(req: any, res: any): any {
-  let params = req.body.params;
-  if (params === undefined) {
+router
+  .post('/', async (context) => {
+    const result = await FetchShoutCloud("test");
+  })
+  .get('/', async (context) => {
+    const result = await FetchShoutCloud("test");
+    context.response.body = result;    
+  })
 
-  }
-  console.log(params);
-  res.end(params);
+async function FetchShoutCloud(command: string): Promise<string> {
+  const data = await (await fetch("HTTP://API.SHOUTCLOUD.IO/V1/SHOUT", {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({"INPUT": command})
+  })).json()
+  return data.OUTPUT;
 }
 
-app.post('/', ball);
 
-const port = 8080;
-app.listen(port, () => {
-  console.log('Sloud Function is Listening on port', port);
-});
+app.use(router.routes());
+app.use(router.allowedMethods());
+
+await app.listen({ port: 8000  });
