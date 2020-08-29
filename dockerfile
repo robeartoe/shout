@@ -10,5 +10,4 @@ RUN deno cache main.ts
 EXPOSE 8080
 
 # Added to ENTRYPOINT of base image.
-# CMD ["run", "--allow-env", "--allow-net", "-c tsconfig.json", "main.ts"]
 CMD ["run", "--allow-env", "--allow-net", "main.ts", "-c", "tsconfig.json"]
