@@ -1,25 +1,12 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
-import { config } from 'https://deno.land/x/dotenv/mod.ts';
+import "https://deno.land/x/dotenv/mod.ts";
+
 // Import Env Variables:
-// const { PORT } = config();
+const PORT = Deno?.env?.get('PORT') ?? 8080;
 
 const app = new Application();
 
-app.addEventListener("listen", ({hostname, port, secure}) => {
-  console.log(
-    `Listening on: ${secure ? "https://" : "http://"}${
-      hostname ?? "localhost"
-    }:${port}`
-  );
-})
-
-// TODO: Verify Webhook:
-
-// TODO: Post to Slack:
-
-// TODO: Get Information:
-
-// TODO: Router:
+// Router:
 const router = new Router();
 
 /**
@@ -39,7 +26,32 @@ const router = new Router();
  */
 router
   .post('/', async (context) => {
-    const result = await FetchShoutCloud("test");
+    try {
+      // Get the Body:
+      const body = await context.request.body();
+      if (!context.request.hasBody) {
+        context.response.status = 400;
+        context.response.body = {
+          success: false,
+          message: "No data provided",
+        };
+        return;
+      }
+      // Call ShoutCloud:
+      const incomingJSON = body?.value as any;
+      const result = await FetchShoutCloud(incomingJSON.text! as string);
+      // Respond back to Slack:
+      context.response.status = 200;
+      context.response.body = {
+        text: result,
+      };
+      return;
+    } catch (error) {
+      console.error(error);
+      context.response.status = 500;
+      return;
+    }
+    // const result = await FetchShoutCloud("test");
   })
   .get('/', async (context) => {
     const result = await FetchShoutCloud("test");
@@ -61,4 +73,12 @@ async function FetchShoutCloud(command: string): Promise<string> {
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-await app.listen({ port: 8000  });
+app.addEventListener("listen", ({hostname, port, secure}) => {
+  console.log(
+    `Listening on: ${secure ? "https://" : "http://"}${
+      hostname ?? "localhost"
+    }:${port}`
+  );
+})
+
+await app.listen({ port: Number(PORT)  });

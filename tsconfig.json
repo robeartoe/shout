@@ -1,9 +1,26 @@
-{
-    "compilerOptions": {
-      "baseUrl": ".",
-      "paths": { "*": ["types/*"] },
-        "target": "es2018",
-        "module": "commonjs",
-        "moduleResolution": "node"
-    }
+// {
+    
+//     "compilerOptions": {
+//       "baseUrl": ".",
+//       "paths": { "*": ["types/*"] },
+//         "target": "es2018",
+//         "module": "commonjs",
+//         "moduleResolution": "node",
+    
+//     },
+
+// }
+
+{ 
+  "compilerOptions":{ 
+     "target":"ESNext",
+     "emitDecoratorMetadata":true,
+     "experimentalDecorators":true,
+     "allowUnreachableCode":true,
+     "allowUnusedLabels":true,
+     "noImplicitAny":true,
+     "noImplicitReturns":false,
+     "noImplicitUseStrict":false,
+  }, 
+  "compileOnSave":false
 }

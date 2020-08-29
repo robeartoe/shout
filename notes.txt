@@ -1,0 +1,33 @@
+https://github.com/knative/docs/tree/efa607f93e461d564989c00a4a05ebdae9a0bf09/community/samples/serving/helloworld-deno
+
+gcloud builds submit --tag gcr.io/weatherwarning-149901/helloworld
+
+docker build --tag shout:0.1 .
+docker run --publish 8080:8080 --detach --name shout shout:0.1
+docker rm --force shout
+
+
+[0m[1m[31merror[0m: [0m[1mTS2532[0m [ERROR]: Object is possibly 'undefined'.
+      const result = await FetchShoutCloud(body.value.text);
+[0m[31m                                           ~~~~~~~~~~[0m
+    at [0m[38;5;14mfile:///app/main.ts[0m:[0m[38;5;11m42[0m:[0m[38;5;11m44[0m
+
+[0m[1mTS2339[0m [ERROR]: Property 'text' does not exist on type 'Promise<any> | Promise<Uint8Array> | Promise<string> | FormDataReader | Promise<URLSearchParams>'.
+  Property 'text' does not exist on type 'Promise<any>'.
+      const result = await FetchShoutCloud(body.value.text);
+[0m[31m                                                      ~~~~[0m
+    at [0m[38;5;14mfile:///app/main.ts[0m:[0m[38;5;11m42[0m:[0m[38;5;11m55[0m
+
+[0m[1mTS2345[0m [ERROR]: Argument of type '{ depth: number; sorted: boolean; trailingComma: boolean; compact: boolean; iterableLimit: number; }' is not assignable to parameter of type 'InspectOptions'.
+  Object literal may only specify known properties, and 'sorted' does not exist in type 'InspectOptions'.
+      sorted: true,
+[0m[31m      ~~~~~~~~~~~~[0m
+    at [0m[38;5;14mhttps://deno.land/std@0.65.0/testing/asserts.ts[0m:[0m[38;5;11m26[0m:[0m[38;5;11m7[0m
+
+[0m[1mTS2322[0m [ERROR]: Type 'Uint8Array | undefined' is not assignable to type 'Uint8Array | null'.
+  Type 'undefined' is not assignable to type 'Uint8Array | null'.
+    return line;
+[0m[31m    ~~~~~~~~~~~~[0m
+    at [0m[38;5;14mhttps://deno.land/std@0.65.0/textproto/mod.ts[0m:[0m[38;5;11m149[0m:[0m[38;5;11m5[0m
+
+Found 4 errors.
