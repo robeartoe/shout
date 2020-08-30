@@ -1,5 +1,24 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
+import { multiParser } from 'https://deno.land/x/multiparser@v2.0.1/mod.ts'
+import bodyParser from './body-parser.ts';
 import "https://deno.land/x/dotenv/mod.ts";
+
+interface SlackRequest {
+  token:string;
+  team_id:string;
+  team_domain:string;
+  enterprise_id:string;
+  enterprise_name:string;
+  channel_id:string;
+  channel_name:string;
+  user_id:string;
+  user_name:string;
+  command: string;
+  text:string;
+  response_url:string;
+  trigger_id:string;
+  api_app_id:string;
+}
 
 // Import Env Variables:
 const PORT = Deno?.env?.get('PORT') ?? 8080;
@@ -28,7 +47,6 @@ router
   .post('/', async (context) => {
     try {
       // Get the Body:
-      const body = await context.request.body();
       if (!context.request.hasBody) {
         context.response.status = 400;
         context.response.body = {
@@ -37,13 +55,19 @@ router
         };
         return;
       }
+      const {
+        text = '',
+      }: SlackRequest = await bodyParser(context, ['text']);
+      const regex = /\+/gi;
+      const parsedText = text.split('&')[0].replace(regex, ' ');
       // Call ShoutCloud:
-      const incomingJSON = body?.value as any;
-      const result = await FetchShoutCloud(incomingJSON.text! as string);
+      const result = await FetchShoutCloud(parsedText as string);
       // Respond back to Slack:
       context.response.status = 200;
+      context.response.type = 'application/json';
       context.response.body = {
-        text: result,
+        "response_type": 'in_channel',
+        text: result
       };
       return;
     } catch (error) {
@@ -51,7 +75,6 @@ router
       context.response.status = 500;
       return;
     }
-    // const result = await FetchShoutCloud("test");
   })
   .get('/', async (context) => {
     const result = await FetchShoutCloud("test");

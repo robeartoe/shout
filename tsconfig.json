@@ -18,7 +18,7 @@
      "experimentalDecorators":true,
      "allowUnreachableCode":true,
      "allowUnusedLabels":true,
-     "noImplicitAny":true,
+     "noImplicitAny":false,
      "noImplicitReturns":false,
      "noImplicitUseStrict":false,
   }, 
