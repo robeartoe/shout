@@ -1,4 +1,4 @@
-import {RouterContext, BodyReader, BodyForm} from 'https://deno.land/x/oak/mod.ts';
+import { RouterContext } from 'https://deno.land/x/oak@v6.0.1/mod.ts';
 
 
 const decoder = new TextDecoder();
@@ -73,9 +73,9 @@ export default async (ctx: RouterContext, fields: string[]) => {
 
     // get the body text string
     const buffer = new Uint8Array(1024);
-    const reader = await ctx.request.body({asReader: true} as any) as BodyForm;
-    const value = reader.value as unknown as Deno.Reader;
-    const numBytesRead = await value.read(buffer) || 0;
+    const reader = await ctx.request.body({type: 'reader'});
+    // const value = reader.value as unknown as Deno.Reader;
+    const numBytesRead = await reader.value.read(buffer) || 0;
     const bodyText = decoder.decode(buffer.subarray(0, numBytesRead));
 
     // decode the URI

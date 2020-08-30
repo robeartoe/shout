@@ -1,5 +1,4 @@
-import { Application, Router } from "https://deno.land/x/oak/mod.ts";
-import { multiParser } from 'https://deno.land/x/multiparser@v2.0.1/mod.ts'
+import { Application, Router } from "https://deno.land/x/oak@v6.0.1/mod.ts";
 import bodyParser from './body-parser.ts';
 import "https://deno.land/x/dotenv/mod.ts";
 
@@ -22,7 +21,6 @@ interface SlackRequest {
 
 // Import Env Variables:
 const PORT = Deno?.env?.get('PORT') ?? 8080;
-
 const app = new Application();
 
 // Router:

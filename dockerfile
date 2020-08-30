@@ -1,4 +1,5 @@
-FROM hayd/alpine-deno:1.3.1
+# FROM hayd/alpine-deno:1.2.0
+FROM hayd/alpine-deno:1.3.2
 WORKDIR /app
 
 # These steps will be re-run upon each file change in your working directory:
@@ -10,4 +11,4 @@ RUN deno cache main.ts
 EXPOSE 8080
 
 # Added to ENTRYPOINT of base image.
-CMD ["run", "--allow-env", "--allow-net", "main.ts", "-c", "tsconfig.json"]
+CMD ["run", "--allow-env", "--allow-net", "main.ts"]
