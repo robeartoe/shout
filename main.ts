@@ -53,9 +53,7 @@ router
         };
         return;
       }
-      const {
-        text = '',
-      }: SlackRequest = await bodyParser(context, ['text']);
+      const {text, user_name}: SlackRequest = await bodyParser(context, ['text', 'user_name', 'team_id', 'channel_name', 'command']);
       const regex = /\+/gi;
       const parsedText = text.split('&')[0].replace(regex, ' ');
       // Call ShoutCloud:
@@ -65,7 +63,7 @@ router
       context.response.type = 'application/json';
       context.response.body = {
         "response_type": 'in_channel',
-        text: result
+        text: `${BuildIntro(user_name)}${result}`
       };
       return;
     } catch (error) {
@@ -78,6 +76,21 @@ router
     const result = await FetchShoutCloud("test");
     context.response.body = result;    
   })
+
+  function BuildIntro(user_name: string): string {
+    function GetRandomInt(max: number) {
+      return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    const intros: string[] = [
+      `Umm, did you hear? ${user_name} just said.. `,
+      `What part didn't you understand? ${user_name} is trying to say.. `,
+      `DID ${user_name.toUpperCase()} STUTTER? ${user_name.toUpperCase()} SAID `,
+      `${user_name} just said `,
+      `What ${user_name} is trying to say is `
+    ] 
+    return intros[GetRandomInt(intros.length)];
+  }
 
 async function FetchShoutCloud(command: string): Promise<string> {
   const data = await (await fetch("HTTP://API.SHOUTCLOUD.IO/V1/SHOUT", {
