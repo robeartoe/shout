@@ -12,3 +12,4 @@ EXPOSE 8080
 
 # Added to ENTRYPOINT of base image.
 CMD ["run", "--allow-env", "--allow-net", "main.ts"]
+
