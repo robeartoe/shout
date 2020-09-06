@@ -12,7 +12,7 @@
     "submit:google": "gcloud builds submit --tag gcr.io/weatherwarning-149901/shout",
     "deploy": "gcloud run deploy --image gcr.io/weatherwarning-149901/shout --platform managed",
     "lint": "deno lint --unstable main.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./run_tests.sh"
   },
   "author": "Robert Ruiz",
   "license": "ISC",
