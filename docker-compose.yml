@@ -1,0 +1,12 @@
+version: '3'
+services:
+    web:
+        container_name: web
+        build: .
+        ports:
+            - "8080:8080"
+        tty: true
+        stdin_open: true
+networks:
+    default:
+        driver: "bridge"

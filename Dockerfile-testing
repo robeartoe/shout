@@ -1,0 +1,24 @@
+# FROM hayd/alpine-deno:1.2.0
+FROM hayd/alpine-deno:1.3.2
+WORKDIR /app
+
+# These steps will be re-run upon each file change in your working directory:
+COPY . ./
+
+# Added to ENTRYPOINT of base image.
+CMD ["test",  "--allow-net", "test/main_test.ts"]
+
+#   server:
+#     image: "docker"
+#     build: .
+#     ports:
+#       - "8080:8080"
+#     command: docker run --publish 8080:8080 --detach --name shout shout:0.1
+#     networks: 
+#         - default
+#   test:
+#     image: 'bash'
+#     command: 'ls -a && cd home/ && ls -a'
+#   server: 
+#     image: 'hayd/alpine-deno'
+#     command: "deno run --allow-env --allow-net --allow-read ./main.ts"
