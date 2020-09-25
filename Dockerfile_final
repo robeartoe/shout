@@ -1,0 +1,14 @@
+FROM hayd/alpine-deno:1.3.2
+WORKDIR /app
+
+# These steps will be re-run upon each file change in your working directory:
+COPY . ./
+# Compile the main app so that it doesn't need to be compiled each startup/entry.
+RUN deno cache main_final.ts
+
+# Add metadata to the image to describe which port the container is listening on at runtime.
+EXPOSE 8080
+
+# Added to ENTRYPOINT of base image.
+CMD ["run", "--allow-env", "--allow-net", "main_final.ts"]
+

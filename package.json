@@ -9,6 +9,7 @@
     "start:docker": "docker run --publish 8080:8080 --detach --name shout shout:0.1",
     "remove:docker": "docker rm --force shout",
     "build": "docker build --tag shout:0.1 .",
+    "build:final": "docker build -f Dockerfile_final --tag shout:0.1 .",
     "cloudbuild:test": "cloud-build-local --dryrun=false --substitutions COMMIT_SHA=test .",
     "submit:google": "gcloud builds submit --tag gcr.io/weatherwarning-149901/shout",
     "deploy": "gcloud run deploy --image gcr.io/weatherwarning-149901/shout --platform managed",
