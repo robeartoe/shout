@@ -4,8 +4,8 @@
   "description": "Shout your point across in slack from Google Cloud Run",
   "main": "index.js",
   "scripts": {
-    "start": "deno run --allow-env --allow-net --allow-read ./main.ts",
-    "start:partone": "deno run --allow-env --allow-net --allow-read ./main_partone.ts",
+    "start": "deno run --allow-env --allow-net ./main.ts",
+    "start:final": "deno run --allow-env --allow-net ./main_final.ts",
     "start:docker": "docker run --publish 8080:8080 --detach --name shout shout:0.1",
     "remove:docker": "docker rm --force shout",
     "build": "docker build --tag shout:0.1 .",
